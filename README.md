@@ -103,6 +103,46 @@ G F <BR>
 <hr>
 ['0', '1', '2', '3', '4']
 <hr>
+
+<h3>program<h3>
+
+  ```
+from collections import defaultdict, deque
+
+def bfs(graph, start, visited, path):
+    queue = deque()
+    path.append(start)
+    queue.append(start)
+    visited[start] = True
+    
+    while len(queue) != 0:
+        tmpnode = queue.popleft()
+        for neighbor in graph[tmpnode]:
+            if not visited[neighbor]:
+                path.append(neighbor)
+                queue.append(neighbor)
+                visited[neighbor] = True
+    return path
+
+graph = defaultdict(list)
+v, e = map(int, input().split())
+for i in range(e):
+    u, v = input().split() 
+    graph[u].append(v) 
+    graph[v].append(u)
+start = '0'
+path = []
+visited = defaultdict(bool)
+traversedpath = bfs(graph, start, visited, path)
+print(traversedpath)
+```
+
+<hr>
+<h3>Output:<h3>
+
+  ![image](https://github.com/user-attachments/assets/2ea2b63b-c70b-47ae-9f2e-6fda6fe5e61d)
+
+  <hr>
 <h3>Result:</h3>
 <hr>
 <p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
