@@ -17,23 +17,31 @@ D E
 D G
 G F
 '''
-def bfs(graph,start,visited,path):
-    queue = deque()
-    path.append(start)
-    queue.append(start)
-    visited[start] = True
-    while len(queue) != 0:
-        tmpnode = queue.popleft()
-        #TYPE UR CODE HERE
-    return path
+from collections import defaultdict, deque
+
+def bfs(graph, start, visited, path):
+  queue = deque()
+  path.append(start)
+  queue.append(start)
+  visited[start] = True
+  
+  while len(queue) != 0:
+      tmpnode = queue.popleft()
+      for neighbor in graph[tmpnode]:
+          if not visited[neighbor]:
+              path.append(neighbor)
+              queue.append(neighbor)
+              visited[neighbor] = True
+  return path
 
 graph = defaultdict(list)
-v,e = map(int,input().split())
+v, e = map(int, input().split())
 for i in range(e):
-    #TYOE UR CODE HERE
-
+  u, v = input().split() 
+  graph[u].append(v) 
+  graph[v].append(u)
 start = '0'
 path = []
 visited = defaultdict(bool)
-traversedpath = bfs(graph,start,visited,path)
+traversedpath = bfs(graph, start, visited, path)
 print(traversedpath)
